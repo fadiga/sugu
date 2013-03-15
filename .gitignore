@@ -1,0 +1,7 @@
+*.pyc
+*.orig
+*.sqlite
+local_settings.py
+images_member/
+report_doc/
+static/
