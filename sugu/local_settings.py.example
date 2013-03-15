@@ -17,5 +17,6 @@ settings.DATABASES = {'default': {
     'PORT': ''}
 }
 
+settings.INSTALLED_APPS = settings.INSTALLED_APPS + ('django_extensions',)
 # change that one!
 settings.SECRET_KEY = '___(-_-)___'
