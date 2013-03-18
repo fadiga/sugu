@@ -1,0 +1,11 @@
+Babel==0.9.6
+Django==1.5
+PIL==1.1.7
+argparse==1.2.1
+django-extensions==1.1.1
+django-smuggler==0.3
+django-tinymce==1.5.1b4
+six==1.2.0
+wsgiref==0.1.2
+xlwt==0.7.4
+django-admin-bootstrapped==0.3.2
