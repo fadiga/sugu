@@ -5,3 +5,5 @@ local_settings.py
 images_member/
 report_doc/
 static/
+*.sqlite3
+org_images/
