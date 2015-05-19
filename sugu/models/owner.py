@@ -15,14 +15,31 @@ class Owner(User):
 
     class Meta:
         app_label = 'sugu'
+        verbose_name = _("Owner")
+        verbose_name_plural = _("Owners")
 
     phone = models.CharField(max_length=30, blank=True,
-                                                   verbose_name=("Telephone"))
+                             verbose_name=("Telephone"))
     address_email = models.EmailField(blank=True,
                                       verbose_name=("Adresse électronique"))
 
-    def __unicode__(self):
-        return _(u'%(name)s') % {"name": self.username}
+    def __str__(self):
+        return _("%(name)s") % {"name": self.username}
+
+
+class CategoryOrg(models.Model):
+
+    class Meta:
+        app_label = 'sugu'
+        verbose_name = _("CategoryOrganization")
+        verbose_name_plural = _("CategoryOrganizations")
+
+    name = models.CharField(max_length=150,
+                            verbose_name=("Type d'organisation"),
+                            help_text=ugettext_lazy("Type d'organisation"))
+
+    def __str__(self):
+        return _("%(name)s") % {"name": self.name}
 
 
 class TypeOrganization(models.Model):
@@ -31,12 +48,15 @@ class TypeOrganization(models.Model):
 
     class Meta:
         app_label = 'sugu'
-    name = models.CharField(max_length=150,
-                            verbose_name=("Type d'organisation"),\
-                               help_text=ugettext_lazy("Type d'organisation"))
+        verbose_name = _("TypeOrganization")
+        verbose_name_plural = _("TypeOrganizations")
 
-    def __unicode__(self):
-        return _(u'%(name)s') % {"name": self.name}
+    name = models.CharField(max_length=150,
+                            verbose_name=("Type d'organisation"),
+                            help_text=ugettext_lazy("Type d'organisation"))
+
+    def __str__(self):
+        return _("%(name)s") % {"name": self.name}
 
 
 class Organization(models.Model):
@@ -45,49 +65,30 @@ class Organization(models.Model):
 
     class Meta:
         app_label = 'sugu'
+        verbose_name = _("Organization")
+        verbose_name_plural = _("Organizations")
 
     create_date = models.DateTimeField(verbose_name=("Date d'enregistrement"),
-                                                     default=datetime.today())
+                                       default=datetime.today())
     name = models.CharField(max_length=150,
-                                     verbose_name=("Nom de votre entreprise"))
+                            verbose_name=("Nom de votre entreprise"))
     type_org = models.ForeignKey(TypeOrganization, related_name='types',
-                                         verbose_name=("Type d'organisation"))
+                                 verbose_name=("Type d'organisation"))
     address = models.TextField(blank=True,
-                                          verbose_name=("Adresse principale\
+                               verbose_name=("Adresse principale\
                                                            de votre société"))
-    address_extra = models.CharField(blank=True, max_length=20,\
-                                    verbose_name=("Numero de téléphone\
+    address_extra = models.CharField(blank=True, max_length=20,
+                                     verbose_name=("Numero de téléphone\
                                                         de votre entreprise"))
     address_email = models.EmailField(blank=True,
                                       verbose_name=("Adresse électronique\
                                                         de votre entreprise"))
     legal_infos = models.TextField(blank=True,
-                                        verbose_name=("Informations légales"))
-    owner = models.ForeignKey(Owner, related_name='owner',
-                                                verbose_name=("Proprietaire"))
+                                   verbose_name=("Informations légales"))
+    owner = models.ForeignKey(Owner, related_name='owners',
+                              verbose_name=("Proprietaire"))
     image = models.ImageField(upload_to='org_images/', blank=True,
-                                         verbose_name=("image de la societe"))
+                              verbose_name=("image de la societe"))
 
-    def __unicode__(self):
-        return _(u'%(name)s') % {"name": self.name}
-
-
-class Supplier(models.Model):
-    """ Represents the Fournisseur
-    """
-
-    class Meta:
-        app_label = 'sugu'
-
-    full_name = models.CharField(max_length=150,
-                            verbose_name=("Nom du client"),\
-                                     help_text=ugettext_lazy("Supplier Name"))
-    address_email = models.EmailField(blank=True,
-                                      verbose_name=("Adresse électronique\
-                                                       de votre Fournisseur"))
-    address = models.TextField(blank=True, verbose_name=("Adresse du client"))
-    organization = models.ForeignKey(Organization,\
-                                             verbose_name=(_("Organization")))
-
-    def __unicode__(self):
-        return _(u"%(name)s") % {'name': self.full_name}
+    def __str__(self):
+        return _("%(name)s") % {"name": self.name}

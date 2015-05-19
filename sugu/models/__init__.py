@@ -2,8 +2,6 @@
 # encoding=utf-8
 # maintainer: Fadiga
 
-
-from owner import Supplier
 from owner import Organization
 from owner import Owner
 from owner import TypeOrganization
